@@ -18,47 +18,53 @@ public class Person {
         return id;
     }
 
-    public void setId(Long id) {
+    public Person setId(Long id) {
         this.id = id;
+        return this;
     }
 
     public String getSex() {
         return sex;
     }
 
-    public void setSex(String sex) {
+    public Person setSex(String sex) {
         this.sex = sex;
+        return this;
     }
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
+    public Person setName(String name) {
         this.name = name;
+        return this;
     }
 
     public Long getWeight() {
         return weight;
     }
 
-    public void setWeight(Long weight) {
+    public Person setWeight(Long weight) {
         this.weight = weight;
+        return this;
     }
 
     public Long getHeight() {
         return height;
     }
 
-    public void setHeight(Long height) {
+    public Person setHeight(Long height) {
         this.height = height;
+        return this;
     }
 
     public Long getAge() {
         return age;
     }
 
-    public void setAge(Long age) {
+    public Person setAge(Long age) {
         this.age = age;
+        return this;
     }
 }
