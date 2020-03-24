@@ -3,12 +3,6 @@ package ru.liga.intership.badcode.service;
 
 import ru.liga.intership.badcode.database.Database;
 import ru.liga.intership.badcode.domain.Person;
-
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
-import java.util.ArrayList;
 import java.util.List;
 
 public class PersonService {
@@ -20,18 +14,30 @@ public class PersonService {
      * @return
      */
     public void getAdultMaleUsersAverageBMI() {
-        double totalImt = 0.0;
-        long countOfPerson = 0;
         Database database = new Database();
-        List<Person> adultPersons = database.getPersonsFromDB();
-        for (Person p : adultPersons) {
-            double heightInMeters = p.getHeight() / 100d;
-            double imt = p.getWeight() / (Double) (heightInMeters * heightInMeters);
-            totalImt += imt;
-        }
-        countOfPerson = adultPersons.size();
+        List<Person> adultPersons = database.getConvertedPersonsFromDB();
+        double totalImt = getTotalImt(adultPersons);
+        long countOfPerson = adultPersons.size();
 
         System.out.println("Average imt - " + totalImt / countOfPerson);
+    }
+
+    public double getTotalImt(List<Person> adultPersons) {
+        double totalImt = 0.0;
+        for (Person p : adultPersons) {
+            double heightInMeters = getHeightInMeters(p);
+            double imt = getImt(p, heightInMeters);
+            totalImt += imt;
+        }
+        return totalImt;
+    }
+
+    private double getImt(Person p, double heightInMeters) {
+        return p.getWeight() / (Double) (heightInMeters * heightInMeters);
+    }
+
+    private double getHeightInMeters(Person p) {
+        return p.getHeight() / 100d;
     }
 
 }
